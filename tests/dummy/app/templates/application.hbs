@@ -1,3 +1,16 @@
-<h2 id="title">Welcome to Ember</h2>
+<h2 id="title">ember-speech-to-text</h2>
 
-{{outlet}}
+Language:
+<select onchange={{action "selectLanguage" value="target.value"}}>
+  <option value="" disabled selected>Select a language</option>
+  {{#each languages as |language|}}
+    <option value={{language.short}}>{{language.full}}</option>
+  {{/each}}
+</select>
+<br>
+You said: {{result}}
+<br>
+{{speech-to-text
+  getResult='getResult'
+  buttonTitle=buttonTitle
+  language=language}}
