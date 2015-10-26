@@ -1,4 +1,4 @@
-
+import Ember from 'ember';
 import {
   moduleForComponent,
   test
@@ -7,6 +7,7 @@ import {
 moduleForComponent('speech-to-text', {
   // Specify the other units that are required for this test
   // needs: ['component:foo', 'helper:bar']
+  needs: ['component:speech-to-text']
 });
 
 test('it renders', function(assert) {
@@ -23,17 +24,20 @@ test('it renders', function(assert) {
 test('properties are being set correctly', function(assert) {
   let component = this.subject();
   this.render();
-  let languages=['es', 'en', 'fr', 'it', 'pt'];
-  let randIndex = Math.floor(Math.random() * languages.length);
-  let randBoolean = Math.random() >= 0.5;
-  let randNumber = Math.floor(Math.random());
-  component.set('language', languages[randIndex]);
-  component.set('continuous', randBoolean);
-  component.set('interimResults', randBoolean);
-  component.set('maxAlternatives', randNumber);
-  component.send('startRecognition');
-  assert.equal(languages[randIndex], component.currentSpeechRecognitionSession.lang);
-  assert.equal(randBoolean, component.currentSpeechRecognitionSession.continuous);
-  assert.equal(randBoolean, component.currentSpeechRecognitionSession.interimResults);
-  assert.equal(randNumber, component.currentSpeechRecognitionSession.maxAlternatives);
+
+  Ember.run(function() {
+    let languages=['es', 'en', 'fr', 'it', 'pt'];
+    let randIndex = Math.floor(Math.random() * languages.length);
+    let randBoolean = Math.random() >= 0.5;
+    let randNumber = Math.floor(Math.random());
+    component.set('language', languages[randIndex]);
+    component.set('continuous', randBoolean);
+    component.set('interimResults', randBoolean);
+    component.set('maxAlternatives', randNumber);
+    component.send('startRecognition');
+    assert.equal(languages[randIndex], component.currentSpeechRecognitionSession.lang);
+    assert.equal(randBoolean, component.currentSpeechRecognitionSession.continuous);
+    assert.equal(randBoolean, component.currentSpeechRecognitionSession.interimResults);
+    assert.equal(randNumber, component.currentSpeechRecognitionSession.maxAlternatives);
+  });
 });
