@@ -48,10 +48,6 @@ export default Ember.Component.extend({
         speechRecognition.onend = Ember.run.bind(this, this.onRecognitionEnd);
         this.set('currentSpeechRecognitionSession', speechRecognition);
         speechRecognition.start();
-    },
-
-    getResult(result) {
-      this.sendAction('getResult', result);
     }
   }
 });
