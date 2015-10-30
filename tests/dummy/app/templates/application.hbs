@@ -1,16 +1,28 @@
-<h2 id="title">ember-speech-to-text</h2>
+<div class="speech-to-text-container">
+  <div class="background-container">
+    <img src="background.png" class="background-item"/>
+  </div>
 
-Language:
-<select onchange={{action "selectLanguage" value="target.value"}}>
-  <option value="" disabled selected>Select a language</option>
-  {{#each languages as |language|}}
-    <option value={{language.short}}>{{language.full}}</option>
-  {{/each}}
-</select>
-<br>
-You said: {{result}}
-<br>
-{{speech-to-text
-  getResult='getResult'
-  buttonTitle=buttonTitle
-  language=language}}
+  <div class="speech-recognition-container">
+    <div class="language-container">
+      Language:
+      <select onchange={{action "selectLanguage" value="target.value"}}>
+        <option value="" disabled selected>Select a language</option>
+        {{#each languages as |language|}}
+          <option value={{language.short}}>{{language.full}}</option>
+        {{/each}}
+      </select>
+    </div>
+
+    <div class="result-container">
+      You said: {{result}}
+    </div>
+
+    <div class="component-container">
+      {{speech-to-text
+        getResult='getResult'
+        buttonTitle=buttonTitle
+        language=language}}
+    </div>
+  </div>
+</div>
