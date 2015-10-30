@@ -1,7 +1,8 @@
 # Ember-speech-to-text 
-[ ![Codeship Status for FutoRicky/ember-speech-to-text](https://codeship.com/projects/f86b6890-5e4a-0133-752d-3e5166c5ae1c/status?branch=master)](https://codeship.com/projects/111352)
 
 Speech to text addon for Ember.js using google's webkitspeechrecognition api.
+
+[![Build Status](https://travis-ci.org/FutoRicky/ember-speech-to-text.svg)](https://travis-ci.org/FutoRicky/ember-speech-to-text)
 
 [DEMO](http://futoricky.github.io/ember-speech-to-text/)
 
