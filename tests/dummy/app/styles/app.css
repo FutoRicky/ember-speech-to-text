@@ -5,14 +5,22 @@
   top: 0;
   left: 0;
 
-} .background-item {
-    height: 100%;
-    width:100%;
-  }
+}
 
 .speech-recognition-container {
-  position: relative;
+  width: 15%;
+  margin: auto;
+  margin-top: 19%;
+}
 
-} .language-container {
+.component-container {
+  text-align: center;
+}
 
+.language-container {
+  text-align: center;
+}
+
+.result-container {
+  text-align: center;
 }
