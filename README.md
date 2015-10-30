@@ -2,6 +2,8 @@
 
 Speech to text addon for Ember.js using google's webkitspeechrecognition api.
 
+[![Build Status](https://travis-ci.org/FutoRicky/ember-speech-to-text.svg)](https://travis-ci.org/FutoRicky/ember-speech-to-text)
+
 [DEMO](http://futoricky.github.io/ember-speech-to-text/)
 
 ## Installation
