@@ -39,7 +39,7 @@ Example:
 
   ```
   actions: {
-    getResults(result) {
+    getResult(result) {
       //Do something with result.
   }
   ```
@@ -47,7 +47,7 @@ Example:
   `app/templates/example.hbs`:
 
   ```
-  {{speech-to-text getResults='getResults'}}
+  {{speech-to-text getResult='getResult'}}
   ```
 
 ## Contributions
