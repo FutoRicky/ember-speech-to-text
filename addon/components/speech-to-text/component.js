@@ -1,8 +1,12 @@
 /*global webkitSpeechRecognition*/
 import Ember from 'ember';
 import layout from './template';
+const {
+  Component,
+  run
+} = Ember;
 
-export default Ember.Component.extend({
+export default Component.extend({
   layout: layout,
   buttonTitle: '',
   speechRecognition: new webkitSpeechRecognition(),
@@ -15,39 +19,48 @@ export default Ember.Component.extend({
   interimResults: false,
   maxAlternatives: 1,
 
-
-  onRecognitionEnd: function() {
+  onRecognitionEnd() {
     this.get('speechRecognition').stop();
   },
 
-  onRecognitionError: function(error) {
+  onRecognitionError(error) {
     console.log(error);
   },
 
-  onRecognitionResult: function(e) {
+  onRecognitionResult(e) {
     let result= '';
-    let resultNo = 0;
-    let alternativeNo = 0;
+    const resultNo = 0;
+    const alternativeNo = 0;
 
     result = e.results[resultNo][alternativeNo].transcript;
     this.sendAction('getResult', result);
   },
 
+  startRecognition(){
+    let speechRecognition = this.speechRecognition;
+    // set properties
+    speechRecognition.lang = this.get('language');
+    speechRecognition.continuous = this.get('continuous');
+    speechRecognition.interimResults = this.get('interimResults');
+    speechRecognition.maxAlternatives = this.get('maxAlternatives');
+
+    // set events
+    speechRecognition.onresult = run.bind(this, this.onRecognitionResult);
+    speechRecognition.onerror = run.bind(this, this.onRecognitionError);
+    speechRecognition.onend = run.bind(this, this.onRecognitionEnd);
+    this.set('currentSpeechRecognitionSession', speechRecognition);
+    speechRecognition.start();
+  },
+
+  click(){
+    if (this.get('hasBlock')) {
+      this.startRecognition();
+    }
+  },
+
   actions: {
     startRecognition() {
-        let speechRecognition = this.speechRecognition;
-        // set properties
-        speechRecognition.lang = this.get('language');
-        speechRecognition.continuous = this.get('continuous');
-        speechRecognition.interimResults = this.get('interimResults');
-        speechRecognition.maxAlternatives = this.get('maxAlternatives');
-
-        // set events
-        speechRecognition.onresult = Ember.run.bind(this, this.onRecognitionResult);
-        speechRecognition.onerror = Ember.run.bind(this, this.onRecognitionError);
-        speechRecognition.onend = Ember.run.bind(this, this.onRecognitionEnd);
-        this.set('currentSpeechRecognitionSession', speechRecognition);
-        speechRecognition.start();
+      this.startRecognition();
     }
   }
 });
