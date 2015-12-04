@@ -21,6 +21,7 @@ export default Component.extend({
 
   onRecognitionEnd() {
     this.get('speechRecognition').stop();
+    this.set('currentSpeechRecognitionSession', null);
   },
 
   onRecognitionError(error) {
@@ -54,12 +55,16 @@ export default Component.extend({
 
   click(){
     if (this.get('hasBlock')) {
-      this.startRecognition();
+      if (this.get('currentSpeechRecognitionSession')) {
+        this.onRecognitionEnd();
+      } else {
+        this.startRecognition();
+      }
     }
   },
 
   actions: {
-    startRecognition() {
+    startRecognition(){
       this.startRecognition();
     }
   }
