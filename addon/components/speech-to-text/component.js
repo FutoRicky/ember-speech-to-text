@@ -18,14 +18,16 @@ export default Component.extend({
   continuous: false,
   interimResults: false,
   maxAlternatives: 1,
+  isRecording: false,
 
   onRecognitionEnd() {
     this.get('speechRecognition').stop();
-    this.set('currentSpeechRecognitionSession', null);
+    this.set('isRecording', false);
   },
 
   onRecognitionError(error) {
     console.log(error);
+    this.set('isRecording', false);
   },
 
   onRecognitionResult(e) {
@@ -50,12 +52,13 @@ export default Component.extend({
     speechRecognition.onerror = run.bind(this, this.onRecognitionError);
     speechRecognition.onend = run.bind(this, this.onRecognitionEnd);
     this.set('currentSpeechRecognitionSession', speechRecognition);
+    this.set('isRecording', true);
     speechRecognition.start();
   },
 
   click(){
     if (this.get('hasBlock')) {
-      if (this.get('currentSpeechRecognitionSession')) {
+      if (this.get('isRecording')) {
         this.onRecognitionEnd();
       } else {
         this.startRecognition();
