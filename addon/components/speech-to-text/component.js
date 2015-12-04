@@ -11,7 +11,7 @@ export default Component.extend({
   buttonTitle: '',
   speechRecognition: new webkitSpeechRecognition(),
   currentSpeechRecognitionSession: null,
-  result: '',
+  result: null,
 
   // PROPERTIES
   language: null,
@@ -36,7 +36,10 @@ export default Component.extend({
     const alternativeNo = 0;
 
     result = e.results[resultNo][alternativeNo].transcript;
-    this.sendAction('getResult', result);
+    this.set('result', result);
+    if (this.get('onResult')) {
+      this.sendAction('onResult', result);
+    }
   },
 
   startRecognition(){

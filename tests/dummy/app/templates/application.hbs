@@ -17,15 +17,20 @@
     <div class="component-container">
       <h2>Component Without Block Params:</h2>
       {{speech-to-text
-        getResult='getResult'
+        onResult='onResult'
+        result=result
         buttonTitle=buttonTitle
         language=language}}
+    </div>
+
+    <div class="result-container">
+      <h2>{{resultForBlock}}</h2>
     </div>
 
     <div class="component-container">
       <h2>Component With Block Params:</h2>
       {{#speech-to-text
-        getResult='getResult'
+        result=resultForBlock
         language=language}}
         <button type="button">
           {{#if isRecording}}
