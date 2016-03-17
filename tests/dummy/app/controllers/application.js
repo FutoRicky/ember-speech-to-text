@@ -33,9 +33,10 @@ export default Ember.Controller.extend({
   ],
 
   actions: {
-    getResult(result) {
-      this.set('result', result);
+    onResult(result) {
+      console.log(result);
     },
+
     selectLanguage(language) {
       this.set('language', language);
     }

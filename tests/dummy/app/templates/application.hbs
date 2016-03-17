@@ -1,5 +1,4 @@
 <div class="speech-to-text-container">
-
   <div class="speech-recognition-container">
     <div class="language-container">
       Language:
@@ -16,10 +15,31 @@
     </div>
 
     <div class="component-container">
+      <h2>Component Without Block Params:</h2>
       {{speech-to-text
-        getResult='getResult'
+        onResult='onResult'
+        result=result
         buttonTitle=buttonTitle
         language=language}}
+    </div>
+
+    <div class="result-container">
+      <h2>{{resultForBlock}}</h2>
+    </div>
+
+    <div class="component-container">
+      <h2>Component With Block Params:</h2>
+      {{#speech-to-text
+        result=resultForBlock
+        language=language}}
+        <button type="button">
+          {{#if isRecording}}
+            Press to Record
+          {{else}}
+            Press to Stop Recording
+          {{/if}}
+        </button>
+      {{/speech-to-text}}
     </div>
   </div>
 </div>
